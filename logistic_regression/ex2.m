@@ -23,8 +23,19 @@ clear ; close all; clc
 %  The first two columns contains the exam scores and the third column
 %  contains the label.
 
-data = load('ex2data1.txt');
-X = data(:, [1, 2]); y = data(:, 3);
+% load data
+data = load('machine_learning_data')
+
+% tmp commentout
+% X = data(:, 3:(size(data, 2) - 1));
+
+% tmp use No.1 and No.2 popular odds
+X = data(:, 3:4);
+
+% y raw data
+y = data(:, size(data, 2));
+% convert 1(popularity No.1 win) and 0(other win)
+y = convertWinHorcePopularityResult(y)
 
 %% ==================== Part 1: Plotting ====================
 %  We start the exercise by first plotting the data to understand the
@@ -38,15 +49,14 @@ plotData(X, y);
 % Put some labels
 hold on;
 % Labels and Legend
-xlabel('Exam 1 score')
-ylabel('Exam 2 score')
+xlabel('No1 odds')
+ylabel('No2 odds')
 
 % Specified in plot order
-legend('Admitted', 'Not admitted')
+legend('No1 win', 'Other win')
 hold off;
 
 fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
 
 
 %% ============ Part 2: Compute Cost and Gradient ============
@@ -97,11 +107,13 @@ plotDecisionBoundary(theta, X, y);
 % Put some labels
 hold on;
 % Labels and Legend
-xlabel('Exam 1 score')
-ylabel('Exam 2 score')
+xlabel('No1 odds')
+ylabel('No2 odds')
+
 
 % Specified in plot order
-legend('Admitted', 'Not admitted')
+legend('No1 win', 'Other win')
+
 hold off;
 
 fprintf('\nProgram paused. Press enter to continue.\n');
@@ -128,7 +140,7 @@ fprintf(['For a student with scores 45 and 85, we predict an admission ' ...
 % Compute accuracy on our training set
 p = predict(theta, X);
 
-fprintf('Train Accuracy: %f\n', mean(double(p == y)) * 100);
+fprintf('Train Accuracy: %f\n', mean(double(p == convertWinHorcePopularityResult(y))) * 100);
 
 fprintf('\nProgram paused. Press enter to continue.\n');
 pause;
