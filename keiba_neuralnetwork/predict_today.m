@@ -3,6 +3,7 @@
 load('theta0522')
 
 % load today data
-today_X = [2.1 5.2 5.4 7.2 14.4 19.8 31.9 34.8 54.9 70.8 85.9 88.2 96.5 118.0 155.4 218.1]
+row_X = [2.0 5.3 5.7 7.7 14.9 15.9 35.3 38.5 61.8 80.0 92.3 100.2 101.4 146.1 183.5 240.4]
+today_X = featureNormalize(row_X);
 larger_pop_num = 5;
 p = predict(Theta1, Theta2, today_X, larger_pop_num)

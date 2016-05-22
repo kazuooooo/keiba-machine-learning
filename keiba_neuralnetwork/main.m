@@ -4,7 +4,7 @@
 data = load('machine_learning_data');
 
 % Xのデータを取得
-X = data(:, 3:(size(data, 2) - 1));
+X = data(:, 8:(size(data, 2) - 1));
 
 % 2乗のパラメータを加えてみる
 % わざとoverfitさせた
@@ -17,7 +17,7 @@ X = featureNormalize(X);
 y = data(:, size(data, 2));
 
 % トレーニングセット、クロスバリデーションセット、テストセットにデータを分割
-training_size = 1000;
+training_size = 300;
 cv_size = 100;
 test_size = 100;
 [X, y, Xval, yval, Xtest, ytest] = divideData(X, y, training_size, cv_size, test_size);
@@ -45,8 +45,8 @@ initial_nn_params = [initial_Theta1(:) ; initial_Theta2(:)];
 % implemented in nnCostFunctio
 
 %% =========== Part 5: gradient checking =============
-lambda = 3;
-checkNNGradients(lambda);
+% lambda = 3;
+% checkNNGradients(lambda);
 
 %% =========== Part 6: training NN=============
 options = optimset('MaxIter', 50);
@@ -65,8 +65,9 @@ Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):en
 %% ============= Part7: predict ===============
 
 larger_pop_num = 5;
-p = predict(Theta1, Theta2, Xval, larger_pop_num)
-odds = data((training_size + 1) : (training_size + cv_size), 3:(size(data, 2) - 1));
-[wins wins_yen loses loses_yen result] = calcResult(p, yval, odds)
+odds_cv = data((training_size + 1) : (training_size + cv_size), 3:(size(data, 2) - 1));
+p = predict(Theta1, Theta2, Xval, larger_pop_num, odds_cv)
+[wins wins_yen loses loses_yen hit_persentage result] = calcResult(p, yval, odds_cv)
 
+% [wins wins_yen loses loses_yen hit_persentage result] = calcResult(op, yval, odds_cv)
 
