@@ -13,10 +13,10 @@ p = zeros(size(X, 1), 1);
 op = zeros(size(X, 1), 1);
 
 h1 = sigmoid([ones(m, 1) X] * Theta1');
-h2 = sigmoid([ones(m, 1) h1] * Theta2')
-h2_op = odds .* h2
-p = largerProbPops(h2, num)
-op = largerProbPops(h2_op, num)
+h2 = sigmoid([ones(m, 1) h1] * Theta2');
+h2_op = odds .* h2;
+p = largerProbPops(h2, num);
+op = largerProbPops(h2_op, num);
 % =========================================================================
 
 

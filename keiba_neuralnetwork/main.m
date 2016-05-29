@@ -1,13 +1,12 @@
 function [op_result test_op_result] = main(X, data)
 
 % Xのパラメータの正規化
-size(X)
 X = featureNormalize(X)
 % Yのデータを取得
 y = data(:, size(data, 2));
 
 % トレーニングセット、クロスバリデーションセット、テストセットにデータを分割
-training_size = 10;
+training_size = 2000;
 cv_size = 100;
 test_size = 100;
 [X, y, Xval, yval, Xtest, ytest] = divideData(X, y, training_size, cv_size, test_size);
@@ -68,7 +67,6 @@ race_id_cv = data(cv_start : cv_end, 1);
 [p op] = predict(Theta1, Theta2, Xval, larger_pop_num, odds_cv);
 % [wins wins_yen loses loses_yen hit_persentage result] = calcResult(p, yval, odds_cv, race_id_cv)
 [op_wins op_wins_yen op_loses op_loses_yen op_hit_persentage op_result] = calcResult(op, yval, odds_cv, race_id_cv)
-
 % evaluate test samples
 test_start = cv_end + 1;
 test_end = cv_end + test_size;
@@ -76,7 +74,8 @@ odds_test = data(test_start : test_end, 3:18);
 race_id_test = data(test_start : test_end, 1);
 [p op] = predict(Theta1, Theta2, Xtest, larger_pop_num, odds_test);
 % [wins wins_yen loses loses_yen hit_persentage result] = calcResult(p, ytest, odds_test, race_id_test);
-[test_op_wins test_op_wins_yen test_op_loses test_op_loses_yen test_op_hit_persentage test_op_result] = calcResult(op, ytest, odds_test, race_id_test);
+[test_op_wins test_op_wins_yen test_op_loses test_op_loses_yen test_op_hit_persentage test_op_result] = calcResult(op, ytest, odds_test, race_id_test)
+save -binary theta0529-5 Theta1 Theta2
 end
 
 

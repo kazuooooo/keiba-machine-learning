@@ -30,6 +30,7 @@ x = 1:8;
 % [op_cv_results_wins_yen(1, 7), op_test_results_wins_yen(1, 7)] = main([X_odds X_horce_num], data)
 % 31560   32730   31690    1630   28840   18180   43310
 %         dist    course                          horce_num
+X = [X_odds X_dist X_course X_horce_num]
 [op_cv_results_wins_yen(1, 8), op_test_results_wins_yen(1, 8)] = main([X_odds X_dist X_course X_horce_num], data)
 op_cv_results_wins_yen .+ op_test_results_wins_yen
 plot(x, op_cv_results_wins_yen, "k");
