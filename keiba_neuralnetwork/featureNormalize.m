@@ -31,7 +31,7 @@ mu = mean(X);
 % get std
 sigma = std(X);
 % normalization
-X_norm = (X - mu) ./ sigma
+X_norm = (X - mu) ./ sigma;
 % ============================================================
 
 end

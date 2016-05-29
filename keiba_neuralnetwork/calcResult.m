@@ -1,4 +1,4 @@
-function [wins wins_yen loses loses_yen hit_percentage result] = calcResult(bet_populations, y, odds)
+function [wins wins_yen loses loses_yen hit_percentage result] = calcResult(bet_populations, y, odds, race_id)
   result = 0;
   wins = 0;
   wins_yen = 0;
@@ -14,6 +14,7 @@ function [wins wins_yen loses loses_yen hit_percentage result] = calcResult(bet_
     if bet_result(i) == 1
       wins_yen += odds(i, y(i)) * 100;
       wins += 1;
+      % fprintf('Win: %i \nWinrace_id: %i odds: %f\n', i, race_id(i), odds(i, y(i)));
     else
       loses += 1;
     end
